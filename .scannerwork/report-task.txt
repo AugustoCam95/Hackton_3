@@ -1,0 +1,6 @@
+projectKey=hacton3
+serverUrl=http://localhost:9000
+serverVersion=10.6.0.92116
+dashboardUrl=http://localhost:9000/dashboard?id=hacton3
+ceTaskId=fce12759-68f8-4d28-92aa-fa6b4a3b39e1
+ceTaskUrl=http://localhost:9000/api/ce/task?id=fce12759-68f8-4d28-92aa-fa6b4a3b39e1
