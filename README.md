@@ -1,171 +1,72 @@
-Claro! Aqui está um exemplo de um README bem documentado para o seu projeto.
+# Getting Started with Create React App
 
-## Projeto de Gerenciamento de Alunos
+![](.github/Print.png)
 
-### Descrição
-Este projeto consiste em uma API de gerenciamento de alunos, construída com Node.js, Express, e MySQL. A API permite listar todos os alunos, obter detalhes de um aluno específico e adicionar novos alunos.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Estrutura do Projeto
-```
-your-project/
-├── node_modules/
-├── public/
-├── src/
-│   ├── database.js
-│   ├── index.js
-│   └── .env
-├── package.json
-└── README.md
-```
+## Available Scripts
 
-### Dependências
-O projeto utiliza as seguintes dependências:
-- express
-- body-parser
-- cors
-- mysql2
-- dotenv
+In the project directory, you can run:
 
-### Configuração do Banco de Dados
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis de ambiente:
-```
-MYSQL_IP=localhost
-MYSQL_USER=root
-MYSQL_ROOT_PASSWORD=yourpassword
-MYSQL_DATABASE=yourdatabase
-```
+### `npm start`
 
-### Configuração do Projeto
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-#### Instalação
-1. Clone o repositório:
-   ```sh
-   git clone <URL_DO_REPOSITORIO>
-   cd your-project
-   ```
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-2. Instale as dependências:
-   ```sh
-   npm install
-   ```
+### `npm test`
 
-3. Configure as variáveis de ambiente no arquivo `.env` conforme mostrado acima.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-#### Estrutura de Arquivos
+### `npm run build`
 
-##### `src/database.js`
-```javascript
-import mysql from 'mysql2';
-import dotenv from 'dotenv';
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-dotenv.config();
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-const pool = mysql.createPool({
-    host: process.env.MYSQL_IP,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-}).promise();
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-export async function getAlunos() {
-    const result = await pool.query(`SELECT * FROM ALUNOS;`);
-    return result[0];
-}
+### `npm run eject`
 
-export async function getAluno(id) {
-    const result = await pool.query(`
-    SELECT * 
-    FROM ALUNOS
-    WHERE id = ?;
-    `, [id]);
-    return result[0];
-}
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-export async function createAluno(nome, idade, cidade) {
-    const result = await pool.query(`
-    INSERT INTO ALUNOS (nome, idade, cidade)
-    VALUES (?, ?, ?);
-    `, [nome, idade, cidade]);
-    const id = result[0].insertId;
-    return getAluno(id);
-}
-```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-##### `src/index.js`
-```javascript
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import { getAluno, getAlunos, createAluno } from './database.js';
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-const app = express();
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-app.use(bodyParser.json());
-app.use(cors());
+## Learn More
 
-app.get("/alunos", async (req, res) => {
-    const alunos = await getAlunos();
-    res.send(alunos);
-});
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-app.get("/aluno/:id", async (req, res) => {
-    const id = req.params.id;
-    const aluno = await getAluno(id);
-    res.send(aluno);
-});
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-app.post("/alunos", async (req, res) => {
-    const { nome, idade, cidade } = req.body;
-    const aluno = await createAluno(nome, idade, cidade);
-    res.status(201).send(aluno);
-});
+### Code Splitting
 
-app.listen(8080, () => {
-    console.log('O servidor está executando na porta 8080');
-});
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Executando o Projeto
+### Analyzing the Bundle Size
 
-1. Certifique-se de que o MySQL está rodando e que o banco de dados especificado no `.env` está criado.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-2. Para iniciar o servidor, execute:
-   ```sh
-   npm start
-   ```
+### Making a Progressive Web App
 
-3. O servidor estará rodando na porta 8080. Você pode acessar os seguintes endpoints:
-   - `GET /alunos`: Retorna todos os alunos.
-   - `GET /aluno/:id`: Retorna os detalhes de um aluno específico.
-   - `POST /alunos`: Adiciona um novo aluno. Espera um JSON no corpo da requisição com os campos `nome`, `idade`, e `cidade`.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Exemplos de Requisições
+### Advanced Configuration
 
-#### `GET /alunos`
-```sh
-curl -X GET http://localhost:8080/alunos
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-#### `GET /aluno/:id`
-```sh
-curl -X GET http://localhost:8080/aluno/1
-```
+### Deployment
 
-#### `POST /alunos`
-```sh
-curl -X POST http://localhost:8080/alunos -H "Content-Type: application/json" -d '{"nome":"João", "idade":27, "cidade":"Salvador"}'
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### Contribuindo
-Se você deseja contribuir com o projeto, por favor, siga as instruções abaixo:
-1. Faça um fork do projeto.
-2. Crie uma nova branch (`git checkout -b feature/nova-feature`).
-3. Faça suas alterações e commite (`git commit -am 'Adiciona nova feature'`).
-4. Envie para o branch (`git push origin feature/nova-feature`).
-5. Abra um Pull Request.
+### `npm run build` fails to minify
 
-### Licença
-Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-### Contato
-Se você tiver alguma dúvida, sinta-se à vontade para abrir uma issue ou entrar em contato.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
