@@ -27,4 +27,4 @@ jobs:
 
       - name: Deploy to AWS S3
         run: |
-          aws s3 sync ./build/ s3://it-talent-hackathon3 --delete
+          aws s3 sync ./build/ s3://hackton3 --delete
