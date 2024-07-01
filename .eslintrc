@@ -11,7 +11,7 @@
     "plugin:react/recommended"
   ],
   "rules": {
-    // Define your project-specific rules here
+    "react/react-in-jsx-scope": "off" // Disable the rule for React in JSX scope
   },
   "settings": {
     "react": {
